@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<!-- WH.html -->
+<!-- Environment -->
+<!--Ezrie Brant -->
+
+<link rel="stylesheet" href="./style.css" />
+<html lang="en">
+<head>
+    <title>Water Heater</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+    <div class="sidenav">
+        <header>Environment</header>
+        <ul>
+            <!-- Couldn't figure out how to set the correct left-padding -->
+            <li><a href="./HC-devices.html">&nbspHeating & Cooling</a></li>
+            <li style=" background-color:#218edb;"><a href="./WH.html">&nbsp &nbsp &nbsp &nbsp &nbsp Water Heater</a></li>
+            <li><a href="./L-devices.html">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspLighting</a></li>
+            <li><a href="./F-devices.html">&nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspFans</a></li>
+            <li><a href="./D-devices.html">&nbsp &nbsp &nbsp &nbsp Dehumidifiers</a></li>
+        </ul>
+        <div class="backbutton">
+            <img src="https://i.imgur.com/901OdAA.png" width="30" />
+            <a href="./HomePage.html"> Back</a>
+        </div>
+    </div>
+
+    <div class="main" style="min-width:720px; height:610px;">
+
+        <div class="WHinfo">
+            <img src="https://i.imgur.com/n0MBDAs.png" width="150" />
+
+            <p>
+                <b>78%</b> Hot water remaining
+                <br />
+                &nbsp &nbsp &nbsp &nbsp current energy use: <b>50</b><sub>kw/hr</sub>
+                <br />
+                &nbsp &nbsp &nbsp &nbsp heating is <span><img src="https://i.imgur.com/UY7LQBQ.png" width="50" /></span>
+                OFF
+            </p>
+        </div>
+
+        <div class="WHusage">
+            <p>Usage History</p>
+            <br />
+            <!-- Chart.js -->
+            <canvas height="200" width="200" id="pie-chart"></canvas>
+        </div>
+
+        <div class="WHprogram">
+            <p>Active Hours</p>
+            <br />
+            <img src="https://i.imgur.com/NKjR5pe.png" width="400" height="150" />
+        </div>
+
+
+    </div>
+    <div class="help">
+        <a href="#">Contact Manufacturer</a>
+        <br />
+        Device Model: IH3-019LA-04
+        <br />
+        Installed On: 04-17-2008
+    </div>
+    <!-- Chart.js scripting included -->
+
+    <script>
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ['On', 'Off'],
+                datasets: [{
+                    data: [33, 77],
+                    backgroundColor: ['#218edb', '#eeeeee']
+                }]
+            },
+            options: {
+                title: {
+                    display: false
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            return data['datasets'][0]['data'][tooltipItem['index']] + '%';
+
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

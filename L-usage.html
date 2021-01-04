@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<!-- L-usage.html -->
+<!-- Environment -->
+<!--Ezrie Brant -->
+
+<link rel="stylesheet" href="./style.css" />
+<html lang="en">
+<head>
+    <title>Edit Light</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="scripts.js"></script>
+</head>
+
+<body>
+    <div class="sidenav">
+        <header>Environment</header>
+        <ul>
+            <!-- Couldn't figure out how to set the correct left-padding -->
+            <li><a href="./HC-devices.html">&nbspHeating & Cooling</a></li>
+            <li><a href="./WH.html">&nbsp &nbsp &nbsp &nbsp &nbsp Water Heater</a></li>
+            <li style=" background-color:#218edb;"><a href="./L-devices.html">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspLighting</a></li>
+            <li><a href="./F-devices.html">&nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspFans</a></li>
+            <li><a href="./D-devices.html">&nbsp &nbsp &nbsp &nbsp Dehumidifiers</a></li>
+        </ul>
+        <div class="backbutton">
+            <img src="https://i.imgur.com/901OdAA.png" width="30" />
+            <a href="./HomePage.html"> Back</a>
+        </div>
+    </div>
+
+    <div class="main" style="min-width:720px; height:610px;">
+        <div class="top">
+            <header id="header" style="width:100%;"></header>
+        </div>
+        <div class="Linfo">
+            <div class="Lsetting">
+                <img id="switch" width="50" onclick="toggleSub(this, document.getElementById('switch_text'), localStorage.getItem('position'))" /> <p id="switch_text" style="display:inline;"></p>
+                <br />
+                <form>
+                    Light Level: <input onchange="saveStateSub(this, localStorage.getItem('position'))" type="number" min="0" max="100" value="50" id="ldim" style="width:55px;" /> %
+                </form>
+                Lightbulb color is
+                <form style="padding-left:10px; float:right; display:inline-block;">
+                    <select id="lightcolor" onchange="saveState(this)">
+                        <option value="white">white</option>
+                        <option selected value="purple">purple</option>
+                        <option value="blue">blue</option>
+                        <option value="green">green</option>
+                        <option value="yellow">yellow</option>
+                        <option value="orange">orange</option>
+                        <option value="red">red</option>
+                    </select>
+                </form>
+
+
+
+            </div>
+
+            <div class="Lusage">
+                <p>Usage</p>
+                <!-- Chart.js -->
+                <canvas id="pie-chart"></canvas>
+            </div>
+
+        </div>
+
+        <div class="Lprogram">
+            <p>Program</p>
+            <img src="https://i.imgur.com/NKjR5pe.png" />
+        </div>
+        
+    </div>
+    <div class="help">
+        <a href="#">Contact Manufacturer</a>
+        <br />
+        Device Model: IH3-019LA-04
+        <br />
+        Installed On: 04-17-2008
+    </div>
+
+    <script>
+        //Get parent page's position, if any.
+        var pos;
+        if (localStorage.getItem("position") == null) {
+            pos = "";
+        } else {
+            pos = "" + localStorage.getItem("position");
+        }
+        //Set defaults.
+        if (localStorage.getItem("ldim" + pos) == null) {
+            document.getElementById("ldim").value = 100;
+        } else {
+            document.getElementById("ldim").value = localStorage.getItem("ldim" + pos);
+        }
+        
+
+        if (localStorage.getItem("switch" + pos) == null) {
+            localStorage.setItem("switch" + pos, "https://i.imgur.com/UY7LQBQ.png");
+            localStorage.setItem("switch_text" + pos, "OFF");
+        } else {
+            document.getElementById("switch").src = localStorage.getItem("switch" + pos);
+            document.getElementById("switch_text").innerHTML = localStorage.getItem("switch_text" + pos);
+        }
+
+        if (localStorage.getItem("devicePicked") == null) {
+            document.getElementById("header").innerHTML = "Living Room Ceiling Lights";
+        } else {
+            document.getElementById("header").innerHTML = localStorage.getItem("devicePicked");
+        }
+
+        if (localStorage.getItem("lightcolor") == null) {
+            document.getElementById("lightcolor").value = blue;
+        } else {
+            document.getElementById("lightcolor").value = localStorage.getItem("lightcolor");
+        }
+
+    </script>
+
+    <!-- Chart.js scripting included -->
+    
+    <script>
+            new Chart(document.getElementById("pie-chart"), {
+                type: 'pie',
+                data: {
+                    labels: ['On', 'Off'],
+                    datasets: [{
+                        data: [33, 77],
+                        backgroundColor: ['#218edb', '#eeeeee']
+                    }]
+                },
+                options: {
+                    title: {
+                        display: false
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                return data['datasets'][0]['data'][tooltipItem['index']] + '%';
+
+                            }
+                        }
+                    }
+                }
+        });
+        
+    </script>
+
+</body>
+</html>

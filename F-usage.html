@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<!-- F-usage.html -->
+<!-- Environment -->
+<!--Ezrie Brant -->
+
+<link rel="stylesheet" href="./style.css" />
+<html lang="en">
+<head>
+    <title>Edit Fan</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+    <div class="sidenav">
+        <header>Environment</header>
+        <ul>
+            <!-- Couldn't figure out how to set the correct left-padding -->
+            <li><a href="./HC-devices.html">&nbspHeating & Cooling</a></li>
+            <li><a href="./WH.html">&nbsp &nbsp &nbsp &nbsp &nbsp Water Heater</a></li>
+            <li><a href="./L-devices.html">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspLighting</a></li>
+            <li style=" background-color:#218edb;"><a href="./F-devices.html">&nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspFans</a></li>
+            <li><a href="./D-devices.html">&nbsp &nbsp &nbsp &nbsp Dehumidifiers</a></li>
+        </ul>
+        <div class="backbutton">
+            <img src="https://i.imgur.com/901OdAA.png" width="30" />
+            <a href="./HomePage.html"> Back</a>
+        </div>
+    </div>
+
+    <div class="main" style="min-width:720px; height:610px;">
+        <div class="top">
+            <header style="width:100%;">Living Room Ceiling Fan</header>
+        </div>
+        <div class="Linfo">
+            <div class="Lsetting" style="padding-bottom:115px; padding-top:80px">
+                Fan is <img src="https://i.imgur.com/ln3Hn90.png" width="50" /> ON
+                <br />
+                Speed is
+                <form style="padding-left:10px; float:right">
+                    <select id="lightcolor">
+                        <option value="slow">slow</option>
+                        <option selected value="med">med</option>
+                        <option value="fast">fast</option>
+                    </select>
+                </form>
+            </div>
+
+            <div class="Lusage">
+                <p>Usage</p>
+                <!-- Chart.js -->
+                <canvas height="300" width="300" id="pie-chart"></canvas>
+            </div>
+        </div>
+
+        <div class="Lprogram">
+            <p>Program</p>
+            <img src="https://i.imgur.com/NKjR5pe.png" />
+        </div>
+
+    </div>
+    <div class="help">
+        <a href="#">Contact Manufacturer</a>
+        <br />
+        Device Model: IH3-019LA-04
+        <br />
+        Installed On: 04-17-2008
+    </div>
+
+    <!-- Chart.js scripting included -->
+
+    <script>
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ['On', 'Off'],
+                datasets: [{
+                    data: [33, 77],
+                    backgroundColor: ['#218edb', '#eeeeee']
+                }]
+            },
+            options: {
+                title: {
+                    display: false
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            return data['datasets'][0]['data'][tooltipItem['index']] + '%';
+
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

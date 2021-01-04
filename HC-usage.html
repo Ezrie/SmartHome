@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<!-- HC-usage.html -->
+<!-- Environment -->
+<!--Ezrie Brant -->
+
+<link rel="stylesheet" href="./style.css" />
+<html lang="en">
+<head>
+    <title>Heating Cooling Usage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+    <div class="sidenav">
+        <header>Environment</header>
+        <ul>
+            <!-- Couldn't figure out how to set the correct left-padding -->
+            <li style=" background-color:#218edb;"><a href="./HC-devices.html">&nbspHeating & Cooling</a></li>
+            <li><a href="./WH.html">&nbsp &nbsp &nbsp &nbsp &nbsp Water Heater</a></li>
+            <li><a href="./L-devices.html">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspLighting</a></li>
+            <li><a href="./F-devices.html">&nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbspFans</a></li>
+            <li><a href="./D-devices.html">&nbsp &nbsp &nbsp &nbsp Dehumidifiers</a></li>
+        </ul>
+        <div class="backbutton">
+            <img src="https://i.imgur.com/901OdAA.png" width="30" />
+            <a href="./HomePage.html"> Back</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="top">
+            <header>Usage History</header>
+        </div>
+        <div class="HCuse">
+            <!-- Chart.js -->
+            <canvas id="temp-chart"></canvas>
+
+            <p>Monthy Avg: <b>72</b>&deg;c</p>
+            <p>Monthly Avg: <b>300</b><sub>kw/hr</sub></p>
+        </div>
+    </div>
+
+    <!-- Chart.js scripting -->
+    <script>
+        new Chart(document.getElementById("temp-chart"), {
+            type: 'line',
+            data: {
+                labels: ['Sep 1', 'Sep 2', 'Sep 3', 'Sep 4', 'Sep 5', 'Sep 6', 'Sep 7', 'Sep 8', 'Sep 9', 'Sep 10', 'Sep 11', 'Sep 12', 'Sep 13', 'Sep 14', 'Sep 16', 'Sep 17', 'Sep 18', 'Sep 19', 'Sep 20', 'Sep 21', 'Sep 22', 'Sep 23', 'Sep 24', 'Sep 25', 'Sep 26', 'Sep 27', 'Sep 28', 'Sep 29', 'Sep 30'],
+                datasets: [{
+                    data: [72, 73, 72, 75, 72, 75, 71, 74, 75, 74, 73, 74, 71, 69, 69, 71, 74, 74, 75, 72, 75, 74, 75, 73, 68, 73, 74, 72, 71, 70],
+                    backgroundColor: '#218edb',
+                    fill: true,
+                    label: 'History'
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Household Usage Statistics'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 60,
+                            suggestedMax: 85,
+                            callback: function (value, index, values) {
+                                return value + ' °C';
+                            }
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+</body>
+</html>
